@@ -8,10 +8,10 @@ TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZS
 
 def test_basic_auth():
     print("--- 1. Basic Auth ---")
-    # Эндпоинт ожидает совпадения данных в URL и в заголовках
+    
     url = f"{BASE_URL}/basic-auth/{USERNAME}/{PASSWORD}"
     
-    # Можно передать кортежем: auth=(user, pass)
+    
     response = requests.get(url, auth=(USERNAME, PASSWORD))
     
     if response.status_code == 200:
@@ -24,7 +24,7 @@ def test_bearer_auth():
     print("--- 2. Bearer Token Auth ---")
     url = f"{BASE_URL}/bearer"
     
-    # Bearer передается вручную через словарь headers
+   
     headers = {
         "Authorization": f"Bearer {TOKEN}",
         "Accept": "application/json"
@@ -40,11 +40,10 @@ def test_bearer_auth():
 
 def test_digest_auth():
     print("--- 3. Digest Auth ---")
-    # Алгоритм: /digest-auth/{qop}/{user}/{passwd}
-    # qop (quality of protection) обычно ставим 'auth'
+ 
     url = f"{BASE_URL}/digest-auth/auth/{USERNAME}/{PASSWORD}"
     
-    # Для Digest обязательно используем специальный объект
+   
     response = requests.get(url, auth=HTTPDigestAuth(USERNAME, PASSWORD))
     
     if response.status_code == 200:
