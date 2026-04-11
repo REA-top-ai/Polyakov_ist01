@@ -5,11 +5,11 @@ def key_value(log):
     key =["date", "level"]
     value = log.split("|")
     part_1 = {key : value for key , value in zip(key, value[:2])}
-    part_2 = dict((elements.split("=") for elements in value[2].split()))
+    part_2 = dict((elements.split("=") for elements in value[2].split()))#проверяйте, что индексы есть в списке
 
     for key , value in part_2.items():
         if value.isdigit():
-            part_2[key] = int(value)
+            part_2[key] = int(value) #лучше через get
 
     return part_1 | part_2
 
